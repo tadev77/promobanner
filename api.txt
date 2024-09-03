@@ -1,0 +1,26 @@
+{
+	blacklistPaths: [
+		'/dont-show-here',
+		'/not-here-either',
+	],
+	displayFormat: '{D} {h}:{m}:{s}',
+	bannerDisplayInterval: {
+		init: 1725332400,
+		end: 1725505200,
+	},
+	timerDisplayInterval: {
+		init: 1725332400,
+		end: 1725505200,
+	},
+	cssClasses: {
+		container: 'promobanner-container',
+		counter: 'promobanner-counter',
+		days: 'promobanner-days',
+		hours: 'promobanner-hours',
+		seconds: 'promobanner-seconds',
+		millis: 'promobanner-millis',
+		warning: 'promobanner-warning'
+	},
+	warningBreakpoint: 86400,
+	warningFormat: '{h}:{m}:{s}:{l}'
+}
