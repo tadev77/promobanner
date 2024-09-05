@@ -3,7 +3,7 @@
 		'/dont-show-here',
 		'/not-here-either',
 	],
-	displayFormat: '{D} {h}:{m}:{s}',
+	formatter: (DateTime dt) => { dt.toFormat('hh:mm:ss'); },
 	bannerDisplayInterval: {
 		init: 1725332400,
 		end: 1725505200,
@@ -18,9 +18,6 @@
 		days: 'promobanner-days',
 		hours: 'promobanner-hours',
 		seconds: 'promobanner-seconds',
-		millis: 'promobanner-millis',
 		warning: 'promobanner-warning'
 	},
-	warningBreakpoint: 86400,
-	warningFormat: '{h}:{m}:{s}:{l}'
 }
