@@ -18,6 +18,7 @@ class Promobanner {
 
   constructor({
     blacklistPaths = [],
+    hideWhen = () => false,
     countdownFormatter = (interval) => interval.toFormat('hh:mm:ss'),
     bannerDisplayInterval = {
       init: today,
@@ -34,7 +35,7 @@ class Promobanner {
       ([k, v]) => (this.cssClasses[k] = `.${v}`)
     );
 
-    if (blacklistPaths.includes(window.location.pathname)) {
+    if (blacklistPaths.includes(window.location.pathname) || hideWhen()) {
       return;
     }
 

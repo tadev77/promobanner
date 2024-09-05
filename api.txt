@@ -3,14 +3,15 @@
 		'/dont-show-here',
 		'/not-here-either',
 	],
-	formatter: (DateTime dt) => { dt.toFormat('hh:mm:ss'); },
+	hideWhen: () => false,
+	countdownFormatter: (interval) => interval.toFormat('hh:mm:ss'),
 	bannerDisplayInterval: {
-		init: 1725332400,
-		end: 1725505200,
+		init: new Date(),
+		end: new Date('2030-01-01'),
 	},
 	timerDisplayInterval: {
-		init: 1725332400,
-		end: 1725505200,
+		init: new Date(),
+		end: new Date('2030-01-01'),
 	},
 	cssClasses: {
 		container: 'promobanner-container',
