@@ -13,63 +13,58 @@ class Promobanner {
     days: "promobanner-days",
     hours: "promobanner-hours",
     seconds: "promobanner-seconds",
-    millis: "promobanner-millis",
     warning: "promobanner-warning",
   };
 
-  constructor(
+  constructor({
     blacklistPaths = [],
-    displayFormat = "{Dx} {h}:{m}:{s}",
+    countdownFormatter = (interval) => interval.toFormat('hh:mm:ss'),
     bannerDisplayInterval = {
       init: today,
       end: tomorrow,
     },
     timerDisplayInterval = {
-      init: new Date(),
+      init: today,
       end: tomorrow,
     },
     cssClasses,
-    warningBreakpoint = 86400,
-    warningFormat = "{h}:{m}:{s}:{l}"
-  ) {
+  }) {
     Object.assign(this.cssClasses, cssClasses);
     Object.entries(this.cssClasses).forEach(
       ([k, v]) => (this.cssClasses[k] = `.${v}`)
     );
-
-    this.displayFormat = displayFormat;
-    this.bannerDisplayInterval = bannerDisplayInterval;
-    this.timerDisplayInterval = timerDisplayInterval;
-    this.warningFormat = warningFormat;
-    this.warningBreakpoint = warningBreakpoint;
 
     if (blacklistPaths.includes(window.location.pathname)) {
       return;
     }
 
     if (
-      new Date() < this.bannerDisplayInterval.init ||
-      new Date() > this.bannerDisplayInterval.end
+      new Date() < bannerDisplayInterval.init ||
+      new Date() > bannerDisplayInterval.end
     ) {
       document.querySelector(this.cssClasses.container).remove();
     }
 
-    this.setCounter();
+    const initDate = DateTime.fromJSDate(timerDisplayInterval.init);
+    const endDate = DateTime.fromJSDate(timerDisplayInterval.end);
+
+    if (DateTime.now() > initDate && DateTime.now() < endDate) {
+      this.setCounter(endDate, countdownFormatter);
+    }
   }
 
-  setCounter() {
-    const counterEl = document.querySelector(this.cssClasses.counter);
-    counterEl.innerHTML = "1 dia 13:09:10";
-    const endDate = DateTime.fromJSDate(this.timerDisplayInterval.end);
-
+  setCounter(endDate, countdownFormatter) {
     setInterval(() => {
-      let interval = endDate.diffNow([
+      const interval = endDate.diffNow([
         "days",
         "hours",
         "minutes",
         "seconds",
-      ]).toFormat('d h:m:s');
-      document.querySelector(this.cssClasses.counter).innerHTML = interval;
+      ]);
+
+      const formattedInterval = countdownFormatter(interval);
+
+      document.querySelector(this.cssClasses.counter).innerHTML = formattedInterval;
     }, 1000);
   }
 }
