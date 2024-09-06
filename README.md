@@ -31,7 +31,10 @@ O construtor aceita um objeto com diversos campos. São estes:
 - **locale**: a linguagem a ser usada pela aplicação. *(default: pt-br)*
 - **blacklistPaths**: paths nos quais o banner não deverá ser exibido. Aceita um array de strings.
 - **hideWhen**: função que define se o banner deverá ser exibido. Aceita uma função sem parâmetros que deve retornar um booleano.
-- **countdownFormatter**: função que define o formato exibido do valor do contador. Aceita uma função cujo parâmetro é um objeto **Duration** do [luxon](https://moment.github.io/luxon/api-docs/index.html#duration) e retorna uma string que será inserida no elemento de countdown.
+- **countdownFormatter**: função que define o formato exibido do valor do contador. Aceita uma função cujo parâmetro é um objeto **Duration** do [luxon](https://moment.github.io/luxon/api-docs/index.html#duration) e pode retornar dado de qualquer tipo. O retorno default é uma string com o valor do intervalo formatado em `hh:mm:ss`.
+- **countdownUpdate**: função que definirá como será atualizado o horário no DOM. Como default, ela insere o valor formatado como texto direto no contador. Ela recebe dois parâmetros:
+    - formattedInterval: o valor de retorno de countdownFormatter.
+    - counterEl: elemento DOM do contador.
 - **bannerDisplayInterval**: intervalo dentro do qual o banner deve ser exibido. Aceita um objeto com dois valores, ambos do tipo [Date](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Date): init (para a data a partir da qual o banner deverá ser exibido) e end (data limite para a qual o banner deverá ser exibido).
 - **timerDisplayInterval**: intervalo dentro do qual o contador deve ser exibido. Aceita um objeto com dois valores, ambos do tipo [Date](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Date): 
      - init: para a data a partir da qual o contador deverá ser exibido.

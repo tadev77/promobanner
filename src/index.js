@@ -13,10 +13,13 @@ class Promobanner {
   };
 
   constructor({
-    locale = 'pt-br',
+    locale = "pt-br",
     blacklistPaths = [],
     hideWhen = () => false,
-    countdownFormatter = (interval) => interval.toFormat('hh:mm:ss'),
+    countdownFormatter = (interval) => interval.toFormat("hh:mm:ss"),
+    countdownUpdate = (formattedInterval, counterEl) => {
+      counterEl.innerHTML = formattedInterval;
+    },
     bannerDisplayInterval = {
       init: today,
       end: tomorrow,
@@ -27,8 +30,8 @@ class Promobanner {
     },
     cssClasses,
   }) {
-
     Settings.defaultLocale = locale;
+    this.countdownUpdate = countdownUpdate;
 
     Object.assign(this.cssClasses, cssClasses);
     Object.entries(this.cssClasses).forEach(
@@ -56,16 +59,13 @@ class Promobanner {
 
   setCounter(endDate, countdownFormatter) {
     setInterval(() => {
-      const interval = endDate.diffNow([
-        "days",
-        "hours",
-        "minutes",
-        "seconds",
-      ]);
+      const interval = endDate.diffNow(["days", "hours", "minutes", "seconds"]);
 
       const formattedInterval = countdownFormatter(interval);
-
-      document.querySelector(this.cssClasses.counter).innerHTML = formattedInterval;
+      this.countdownUpdate(
+        formattedInterval,
+        document.querySelector(this.cssClasses.counter)
+      );
     }, 1000);
   }
 }
