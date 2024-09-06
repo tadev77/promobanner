@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Promobanner Example</title>
+    <script src="dist/promobanner-v1.0.0.js"></script>
+    <style>
+      body {
+        background: beige;
+        margin: 0;
+
+        .promobanner-container {
+          position: fixed;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          gap: 8px;
+          background: blue;
+          color: white;
+
+          .promobanner-counter {
+            width: 140px;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: monospace;
+          }
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="promobanner-container">
+      <h1>Exemplo de uso do Promobanner!</h1>
+      <div class="promobanner-counter"></div>
+    </div>
+    <script defer>
+      const promoBanner = new Promobanner({
+        timerDisplayInterval: {
+          init: new Date(),
+          end: new Date("2024-10-05 22:00:00"),
+        },
+        countdownFormatter: (interval) => {
+          let daysRepresentation = "";
+
+          if (interval.days) {
+            daysRepresentation = interval
+              .shiftTo("days")
+              .mapUnits((x) => Math.floor(x))
+              .toHuman();
+          }
+
+          const timeRepresentation = interval
+            .set({ days: 0 })
+            .toFormat("hh:mm:ss");
+
+          return `${daysRepresentation} ${timeRepresentation}`;
+        },
+      });
+    </script>
+  </body>
+</html>

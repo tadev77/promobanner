@@ -17,9 +17,5 @@
 	cssClasses: {
 		container: 'promobanner-container',
 		counter: 'promobanner-counter',
-		days: 'promobanner-days',
-		hours: 'promobanner-hours',
-		seconds: 'promobanner-seconds',
-		warning: 'promobanner-warning'
 	},
 }

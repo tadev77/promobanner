@@ -4,16 +4,12 @@ const tomorrow = new Date(
   today.getMonth(),
   today.getDate() + 1
 );
-import { DateTime, Settings, Duration } from "luxon";
+import { DateTime, Settings } from "luxon";
 
 class Promobanner {
   cssClasses = {
     container: "promobanner-container",
     counter: "promobanner-counter",
-    days: "promobanner-days",
-    hours: "promobanner-hours",
-    seconds: "promobanner-seconds",
-    warning: "promobanner-warning",
   };
 
   constructor({
@@ -74,5 +70,4 @@ class Promobanner {
   }
 }
 
-window.Duration = Duration;
 window.Promobanner = Promobanner;
