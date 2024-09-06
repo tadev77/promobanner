@@ -1,4 +1,5 @@
 {
+	locale: 'pt-br',
 	blacklistPaths: [
 		'/dont-show-here',
 		'/not-here-either',

@@ -4,7 +4,7 @@ const tomorrow = new Date(
   today.getMonth(),
   today.getDate() + 1
 );
-import { DateTime } from "luxon";
+import { DateTime, Settings, Duration } from "luxon";
 
 class Promobanner {
   cssClasses = {
@@ -17,11 +17,9 @@ class Promobanner {
   };
 
   constructor({
+    locale = 'pt-br',
     blacklistPaths = [],
-<<<<<<< HEAD
     hideWhen = () => false,
-=======
->>>>>>> ce112ef1ffe7b2047e877f4489933590b53ee5dd
     countdownFormatter = (interval) => interval.toFormat('hh:mm:ss'),
     bannerDisplayInterval = {
       init: today,
@@ -33,16 +31,15 @@ class Promobanner {
     },
     cssClasses,
   }) {
+
+    Settings.defaultLocale = locale;
+
     Object.assign(this.cssClasses, cssClasses);
     Object.entries(this.cssClasses).forEach(
       ([k, v]) => (this.cssClasses[k] = `.${v}`)
     );
 
-<<<<<<< HEAD
     if (blacklistPaths.includes(window.location.pathname) || hideWhen()) {
-=======
-    if (blacklistPaths.includes(window.location.pathname)) {
->>>>>>> ce112ef1ffe7b2047e877f4489933590b53ee5dd
       return;
     }
 
@@ -77,4 +74,5 @@ class Promobanner {
   }
 }
 
+window.Duration = Duration;
 window.Promobanner = Promobanner;
